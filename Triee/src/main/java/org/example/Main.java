@@ -11,12 +11,9 @@ public class Main {
         for (String palavra : palavras) {
             trie.insere(palavra);
         }
-//        trie.insere("ball");
 
-        No aux1 = trie.getRaiz();
 
 //        trie.percorrerPorNivel();
-
 //        trie.inOrdem();
 
         trie.exibirPalavrasInseridas(trie.getRaiz(), "");

@@ -52,7 +52,6 @@ public class Trie {
                     No restoFilho = new No(sFilho.substring(indexFilho));
                     restoFilho.setFlag(filho.getFlag());
 
-
                     for (int k = 0; k < No.N; k++) {
                         restoFilho.setvLig(k, filho.getvLig(k));
                     }
