@@ -111,10 +111,11 @@ public class Trie {
         }
     }
 
-    public void exibirPalavrasInseridas(No raiz, String palavra) {
-        String concatenar = "";
+    public void exibirPalavrasInseridas(No raiz, String concatenar) {
+
         if (raiz != null) {
             concatenar += raiz.getPalavra();
+
             if (raiz.getFlag())
                 System.out.println(concatenar);
 
