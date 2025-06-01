@@ -45,13 +45,14 @@ public class Trie {
                 }
 
                 if (indexFilho < sFilho.length()) {
-
-                    // Cria novo nó com o prefixo comum
+                    // Novo no com prefixo
                     novaCaixa = new No(sFilho.substring(0, indexFilho));
 
-                    // Cria nó com o sufixo antigo
+                    // Novo no com sufixo antigo
                     No restoFilho = new No(sFilho.substring(indexFilho));
                     restoFilho.setFlag(filho.getFlag());
+
+
                     for (int k = 0; k < No.N; k++) {
                         restoFilho.setvLig(k, filho.getvLig(k));
                     }
@@ -60,11 +61,11 @@ public class Trie {
                     No novo = new No(palavra.substring(i + 1));
                     novo.setFlag(true);
 
-                    // Conecta filhos ao novo nó intermediário
+                    // Ligacao dos filhos ao novo no intermediario
                     novaCaixa.setvLig(restoFilho.getPalavra().charAt(0) - 'a', restoFilho);
                     novaCaixa.setvLig(novo.getPalavra().charAt(0) - 'a', novo);
 
-                    // Atualiza pai
+                    // Atualiza o pai
                     aux.setvLig(pos, novaCaixa);
                 }
 
@@ -107,6 +108,19 @@ public class Trie {
             System.out.println(raiz.getPalavra());
             for (int i = 0; i < 26; i++)
                 inOrdem(raiz.getvLig(i));
+        }
+    }
+
+    public void exibirPalavrasInseridas(No raiz, String palavra) {
+        String concatenar = "";
+        if (raiz != null) {
+            concatenar += raiz.getPalavra();
+            if (raiz.getFlag())
+                System.out.println(concatenar);
+
+            for (int i = 0; i < 26; i++)
+                exibirPalavrasInseridas(raiz.getvLig(i), concatenar);
+
         }
     }
 }

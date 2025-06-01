@@ -15,8 +15,10 @@ public class Main {
 
         No aux1 = trie.getRaiz();
 
-        trie.percorrerPorNivel();
+//        trie.percorrerPorNivel();
 
-        trie.inOrdem();
+//        trie.inOrdem();
+
+        trie.exibirPalavrasInseridas(trie.getRaiz(), "");
     }
 }
