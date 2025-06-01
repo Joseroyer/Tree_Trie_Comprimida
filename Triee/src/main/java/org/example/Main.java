@@ -8,14 +8,15 @@ public class Main {
         List<String> palavras = Arrays.asList("bear", "bell", "bid", "bull", "buy", "sell", "stock", "stop");
         Trie trie = new Trie();
 
-//        for (String palavra : palavras) {
-//            trie.insere(palavra);
-//        }
-        trie.insere(palavras.get(0));
-//        trie.insere(palavras.get(1));
-        trie.insere(palavras.get(2));
-        trie.insere("ball");
+        for (String palavra : palavras) {
+            trie.insere(palavra);
+        }
+//        trie.insere("ball");
 
         No aux1 = trie.getRaiz();
+
+        trie.percorrerPorNivel();
+
+        trie.inOrdem();
     }
 }

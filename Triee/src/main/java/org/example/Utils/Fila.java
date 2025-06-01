@@ -1,5 +1,7 @@
 package org.example.Utils;
 
+import org.example.No;
+
 public class Fila {
     private TpFila fila;
     private int tamanho;
@@ -9,31 +11,31 @@ public class Fila {
         this.tamanho = 0;
     }
 
-    public void Enqueue(String info) {
-        TpFila nc = new TpFila(info);
-        TpFila aux;
+    public void Enqueue(No No, int nivel) {
+        TpFila nc = new TpFila(No, nivel);
 
-        if (fila == null)
+        if (fila == null) {
             fila = nc;
-
-        aux = this.fila;
-        while (aux.getProx() != null) {
-            aux = aux.getProx();
+        } else {
+            TpFila aux = fila;
+            while (aux.getProx() != null) {
+                aux = aux.getProx();
+            }
+            aux.setProx(nc);
         }
-        aux.setProx(nc);
 
-        aux.setProx(nc);
+
         tamanho++;
     }
 
-    public String Dequeue() {
+    public TpFila Dequeue() {
         if (fila == null)
             throw new RuntimeException("Fila vazia");
 
         TpFila aux = fila;
         fila = fila.getProx();
         tamanho--;
-        return aux.getInfo();
+        return aux;
     }
 
     public boolean isEmpty() {

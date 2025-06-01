@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.Utils.Fila;
-import org.w3c.dom.Node;
+import org.example.Utils.TpFila;
 
 public class Trie {
     private No raiz;
@@ -12,10 +12,6 @@ public class Trie {
 
     public No getRaiz() {
         return raiz;
-    }
-
-    public void setRaiz(No raiz) {
-        this.raiz = raiz;
     }
 
     public void insere(String palavra) {
@@ -87,16 +83,30 @@ public class Trie {
 
     public void percorrerPorNivel() {
         Fila fila = new Fila();
+        int nivel = 0;
         No aux = raiz;
-        fila.Enqueue(aux.getPalavra());
+        fila.Enqueue(aux, nivel);
         while (!fila.isEmpty()) {
-            String palavra = fila.Dequeue();
-            System.out.println(aux.getPalavra());
+            nivel++;
+            TpFila no = fila.Dequeue();
+            System.out.println("\t" + no.getNo().getPalavra() + " nivel: " + no.getNivel());
             for (int i = 0; i < No.N; i++) {
-                if (aux.getvLig(i) != null) {
-//                    fila.Enqueue(aux.getvLig(i));
+                if (no.getNo().getvLig(i) != null) {
+                    fila.Enqueue(no.getNo().getvLig(i), no.getNivel() + 1);
                 }
             }
+        }
+    }
+
+    public void inOrdem() {
+        inOrdem(raiz);
+    }
+
+    private void inOrdem(No raiz) {
+        if (raiz != null) {
+            System.out.println(raiz.getPalavra());
+            for (int i = 0; i < 26; i++)
+                inOrdem(raiz.getvLig(i));
         }
     }
 }
