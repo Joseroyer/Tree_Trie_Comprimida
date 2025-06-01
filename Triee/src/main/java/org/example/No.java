@@ -33,7 +33,7 @@ public class No {
         this.palavra = palavra;
     }
 
-    public boolean isFlag() {
+    public boolean getFlag() {
         return flag;
     }
 

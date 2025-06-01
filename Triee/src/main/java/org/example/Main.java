@@ -12,7 +12,10 @@ public class Main {
 //            trie.insere(palavra);
 //        }
         trie.insere(palavras.get(0));
+//        trie.insere(palavras.get(1));
         trie.insere(palavras.get(2));
+        trie.insere("ball");
 
+        No aux1 = trie.getRaiz();
     }
 }

@@ -21,8 +21,7 @@ public class Trie {
     public void insere(String palavra) {
         No aux;
         No novaCaixa;
-        No resto;
-        int pos = 0;
+        int pos = 0, indexFilho = 0;
         boolean flag = true;
 
         if (raiz == null) raiz = new No();
@@ -30,34 +29,71 @@ public class Trie {
 
         for (int i = 0; i < palavra.length() && flag; i++) {
             pos = palavra.charAt(i) - 'a';
+
             if (aux.getvLig(pos) == null) { //primeiro caso, seta o resto da palavra
                 novaCaixa = new No(palavra.substring(i));
+                novaCaixa.setFlag(true);
                 aux.setvLig(pos, novaCaixa);
-                aux.setFlag(true);
 
                 flag = false;
-            } else { //encontrou a palvra
-                No aux1 = aux.getvLig(pos);
+            } else {
+                //encontrou a palvra
+                No filho = aux.getvLig(pos);
+                String sFilho = filho.getPalavra();
 
-                resto = new No(aux1.getPalavra().substring(i + 1));
-                aux1.setPalavra(String.valueOf(palavra.charAt(i)));
+                indexFilho = 1;
+                while (indexFilho < sFilho.length() && i + 1 < palavra.length()
+                        && palavra.charAt(i + 1) == sFilho.charAt(indexFilho)) {
+                    indexFilho++;
+                    i++;
+                }
 
-                aux1.setvLig(pos, resto);
+                if (indexFilho < sFilho.length()) {
+
+                    // Cria novo nó com o prefixo comum
+                    novaCaixa = new No(sFilho.substring(0, indexFilho));
+
+                    // Cria nó com o sufixo antigo
+                    No restoFilho = new No(sFilho.substring(indexFilho));
+                    restoFilho.setFlag(filho.getFlag());
+                    for (int k = 0; k < No.N; k++) {
+                        restoFilho.setvLig(k, filho.getvLig(k));
+                    }
+
+                    // resto da palavra inserida
+                    No novo = new No(palavra.substring(i + 1));
+                    novo.setFlag(true);
+
+                    // Conecta filhos ao novo nó intermediário
+                    novaCaixa.setvLig(restoFilho.getPalavra().charAt(0) - 'a', restoFilho);
+                    novaCaixa.setvLig(novo.getPalavra().charAt(0) - 'a', novo);
+
+                    // Atualiza pai
+                    aux.setvLig(pos, novaCaixa);
+                }
+
+                //Caso do Bear e Bid - Não usado
+//                No aux1 = aux.getvLig(pos);
+//                novaCaixa = new No(sFilho.substring(0, indexFilho + 1));
+//                resto = new No(aux1.getPalavra().substring(i + 1));
+//                aux1.setPalavra(String.valueOf(palavra.charAt(i)));
+//                aux1.setvLig(pos, resto);
             }
 
             aux = aux.getvLig(pos);
         }
+        aux.setFlag(true);
     }
 
-    public void percorrerPorNivel(){
+    public void percorrerPorNivel() {
         Fila fila = new Fila();
         No aux = raiz;
         fila.Enqueue(aux.getPalavra());
         while (!fila.isEmpty()) {
             String palavra = fila.Dequeue();
             System.out.println(aux.getPalavra());
-            for(int i=0; i<No.N; i++){
-                if(aux.getvLig(i) != null){
+            for (int i = 0; i < No.N; i++) {
+                if (aux.getvLig(i) != null) {
 //                    fila.Enqueue(aux.getvLig(i));
                 }
             }
