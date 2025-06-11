@@ -21,11 +21,10 @@ public class Trie {
         boolean flag = true;
 
         if (raiz == null) raiz = new No();
-        aux = raiz;
 
+        aux = raiz;
         for (int i = 0; i < palavra.length() && flag; i++) {
             pos = palavra.charAt(i) - 'a';
-
             if (aux.getvLig(pos) == null) { //primeiro caso, seta o resto da palavra
                 novaCaixa = new No(palavra.substring(i));
                 novaCaixa.setFlag(true);
@@ -68,12 +67,6 @@ public class Trie {
                     aux.setvLig(pos, novaCaixa);
                 }
 
-                //Caso do Bear e Bid - Não usado
-//                No aux1 = aux.getvLig(pos);
-//                novaCaixa = new No(sFilho.substring(0, indexFilho + 1));
-//                resto = new No(aux1.getPalavra().substring(i + 1));
-//                aux1.setPalavra(String.valueOf(palavra.charAt(i)));
-//                aux1.setvLig(pos, resto);
             }
 
             aux = aux.getvLig(pos);
@@ -81,6 +74,12 @@ public class Trie {
         aux.setFlag(true);
     }
 
+    //Caso do Bear e Bid - Não usado
+//                No aux1 = aux.getvLig(pos);
+//                novaCaixa = new No(sFilho.substring(0, indexFilho + 1));
+//                resto = new No(aux1.getPalavra().substring(i + 1));
+//                aux1.setPalavra(String.valueOf(palavra.charAt(i)));
+//                aux1.setvLig(pos, resto);
     public void percorrerPorNivel() {
         Fila fila = new Fila();
         int nivel = 0;
@@ -89,7 +88,9 @@ public class Trie {
         while (!fila.isEmpty()) {
             nivel++;
             TpFila no = fila.Dequeue();
+            
             System.out.println("\t" + no.getNo().getPalavra() + " nivel: " + no.getNivel());
+
             for (int i = 0; i < No.N; i++) {
                 if (no.getNo().getvLig(i) != null) {
                     fila.Enqueue(no.getNo().getvLig(i), no.getNivel() + 1);
