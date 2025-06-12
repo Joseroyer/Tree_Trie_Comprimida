@@ -13,7 +13,7 @@ public class Main {
         }
 
 
-//        trie.percorrerPorNivel();
+        trie.percorrerPorNivel();
 //        trie.inOrdem();
 
         trie.exibirPalavrasInseridas(trie.getRaiz(), "");

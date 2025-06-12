@@ -74,12 +74,6 @@ public class Trie {
         aux.setFlag(true);
     }
 
-    //Caso do Bear e Bid - Não usado
-//                No aux1 = aux.getvLig(pos);
-//                novaCaixa = new No(sFilho.substring(0, indexFilho + 1));
-//                resto = new No(aux1.getPalavra().substring(i + 1));
-//                aux1.setPalavra(String.valueOf(palavra.charAt(i)));
-//                aux1.setvLig(pos, resto);
     public void percorrerPorNivel() {
         Fila fila = new Fila();
         int nivel = 0;
